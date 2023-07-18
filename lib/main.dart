@@ -1,3 +1,4 @@
+import 'package:fitness_app/page/profile_page.dart';
 import 'package:fitness_app/widget/scaffold_with_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -24,26 +25,48 @@ final router = GoRouter(
       routes: <RouteBase>[
         GoRoute(
           path: '/',
-          builder: (context, state) => const Center(
-            child: Text('home'),
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const Center(
+              child: Text('home'),
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return child;
+            },
           ),
         ),
         GoRoute(
           path: '/workout',
-          builder: (context, state) => const Center(
-            child: Text('workout'),
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const Center(
+              child: Text('workout'),
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return child;
+            },
           ),
         ),
         GoRoute(
           path: '/timer',
-          builder: (context, state) => const Center(
-            child: Text('timer'),
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const Center(
+              child: Text('timer'),
+            ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return child;
+            },
           ),
         ),
         GoRoute(
           path: '/profile',
-          builder: (context, state) => const Center(
-            child: Text('profile'),
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const ProfilePage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return child;
+            },
           ),
         ),
       ],

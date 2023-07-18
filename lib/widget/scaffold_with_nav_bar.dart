@@ -17,7 +17,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'ホーム',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.fitness_center),
