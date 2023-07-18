@@ -1,21 +1,69 @@
+import 'package:fitness_app/widget/scaffold_with_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> _shellNavigatorKey =
+    GlobalKey<NavigatorState>();
+
+// GoRouter configuration
+final router = GoRouter(
+  navigatorKey: _rootNavigatorKey,
+  initialLocation: '/',
+  routes: [
+    //タブありの画面
+    ShellRoute(
+      navigatorKey: _shellNavigatorKey,
+      builder: (BuildContext context, GoRouterState state, Widget child) {
+        return ScaffoldWithNavBar(child: child);
+      },
+      routes: <RouteBase>[
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const Center(
+            child: Text('home'),
+          ),
+        ),
+        GoRoute(
+          path: '/workout',
+          builder: (context, state) => const Center(
+            child: Text('workout'),
+          ),
+        ),
+        GoRoute(
+          path: '/timer',
+          builder: (context, state) => const Center(
+            child: Text('timer'),
+          ),
+        ),
+        GoRoute(
+          path: '/profile',
+          builder: (context, state) => const Center(
+            child: Text('profile'),
+          ),
+        ),
+      ],
+    ),
+  ],
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routerConfig: router,
     );
   }
 }
